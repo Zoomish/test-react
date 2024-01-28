@@ -7,6 +7,7 @@ const Button = styled.button`
   border-radius: 3px;
   border: 2px solid #BF4F74;
   color: #BF4F74;
+  cursor:pointer;
 `
 
 const Block = styled.button`
@@ -14,7 +15,8 @@ const Block = styled.button`
   border-radius: 3px;
   border: 2px solid #BF4F74;
   color: #BF4F74;
-  width: 45%
+  width: 45%;
+  cursor:pointer;
 `
 const Container = styled.div`
   display: flex;
