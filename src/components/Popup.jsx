@@ -31,7 +31,7 @@ export const Modal = ({
                     </span>
                 </div>
                 <div className="modal-body">
-                    <div className="modal-content">BBBBBBBB</div>
+                    <div className="modal-content">{data.gender} - {data.status}</div>
                 </div>
                 <div className="modal-footer"><button onClick={onClose}>Cancel</button></div>
             </div>
