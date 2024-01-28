@@ -128,7 +128,7 @@ export default function App() {
       </ButtonContainer>
       <Modal
         isVisible={isModal}
-        data={data}
+        data={data[id-1]}
         onClose={() => setModal(false)}
       />
     </AppContainer>
