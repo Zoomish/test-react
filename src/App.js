@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import './App.css'
 import styled from 'styled-components';
+import { Modal } from "./components/Popup";
 
 
 
@@ -14,9 +15,12 @@ const Button = styled.button`
   user-select: none;
   height: 40px;
   width: 45%;
+  min-width: 470px;
+  margin: auto 16px;
 `
 
 const AppContainer = styled.div`
+  overflow-x:hidden;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -25,7 +29,7 @@ const AppContainer = styled.div`
 const Image = styled.img`
   max-width:40%;
   height:auto;
-  background: url(${props => props.src});ckground: url(${props => props.src});
+  background: url(${props => props.src});
 `
 
 const InfContainer = styled.div`
@@ -50,6 +54,7 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(470px, 1fr));
   grid-gap: 32px;
+  margin-top:5vh;
   grid-auto-flow: dense;
   align-items: center;
   max-width:100vw;
@@ -59,8 +64,9 @@ const ButtonContainer = styled.div`
   flex-flow: row wrap;
   justify-content:center;
   align-items: center;
-  max-width:100vw;
-  margin-top: 20px;
+  width:100vw;
+  margin-top: 5vh;
+  margin-bottom:5vh;
 `
 
 
@@ -68,6 +74,7 @@ export default function App() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [num, setNum] = useState(1);
+  const [isModal, setModal] = useState(true);
   const getData = async (num) => {
     try {
       const response = await axios.get(
@@ -92,7 +99,7 @@ export default function App() {
       <Container>
         {data &&
           data.map((data) => (
-            <Block key={data.id}>
+            <Block key={data.id} onClick={() => setModal(true)}>
               <Image style={{ float: "left", }} src={data.image} alt="Profile image" />
               <InfContainer>
                 <h3>{data.name}</h3>
@@ -115,6 +122,12 @@ export default function App() {
           Load More
         </Button>
       </ButtonContainer>
+      <button onClick={() => setModal(true)}>Click Here</button>
+      <Modal
+        isVisible={isModal}
+        num={num}
+        onClose={() => setModal(false)}
+      />
     </AppContainer>
   );
 }
