@@ -3,10 +3,10 @@ import './Popup.css'
 
 export const Modal = ({
     isVisible = false,
-    data,
+    id,
     onClose,
 }) => {
-    console.log(data);
+    console.log(id);
     const keydownHandler = ({ key }) => {
         switch (key) {
             case "Escape":

@@ -75,6 +75,8 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [num, setNum] = useState(1);
   const [isModal, setModal] = useState(true);
+  const [id, setId] = useState(1);
+
   const getData = async (num) => {
     try {
       const response = await axios.get(
@@ -122,10 +124,9 @@ export default function App() {
           Load More
         </Button>
       </ButtonContainer>
-      <button onClick={() => setModal(true)}>Click Here</button>
       <Modal
         isVisible={isModal}
-        num={num}
+        id={id}
         onClose={() => setModal(false)}
       />
     </AppContainer>
