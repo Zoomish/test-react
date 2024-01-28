@@ -5,15 +5,16 @@ export default function App() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [num, setNum]=useState(1);
 
   useEffect(() => {
-    const getData = async () => {
+    const getData = async (num) => {
       try {
         const response = await axios.get(
-          `https://rickandmortyapi.com/api/character`
+          `https://rickandmortyapi.com/api/character?page=${num}`
         );
         console.log(response.data);
-        setData(response.results);
+        setData(response.data.results);
         setError(null);
       } catch (err) {
         setError(err.message);
@@ -33,9 +34,9 @@ export default function App() {
       )}
       <ul>
         {data &&
-          data.map(({ id, title }) => (
+          data.map(({ id, name }) => (
             <li key={id}>
-              <h3>{id} {title}</h3>
+              <h3>{id} {name}</h3>
             </li>
           ))}
       </ul>
