@@ -71,7 +71,7 @@ const ButtonContainer = styled.div`
 
 
 export default function App() {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [num, setNum] = useState(1);
   const [isModal, setModal] = useState(false);
@@ -83,6 +83,7 @@ export default function App() {
         `https://rickandmortyapi.com/api/character?page=${num}`
       );
       setData(response.data.results);
+      
     } catch (err) {
       setData(null);
       getData(1)
