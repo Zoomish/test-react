@@ -41,19 +41,23 @@
 }
 
 .modal-header {
-    border-bottom: 1px solid #dbdbdb;
     justify-content: space-between;
 }
 
 .modal-footer {
-    border-top: 1px solid #dbdbdb;
     justify-content: flex-end;
 }
 
 .modal-close {
+    position: absolute;
+    background-color: red;
+    right: 0;
+    top: 0px;
+    border-radius: 15px;
+    border-bottom-right-radius:0;
+    border-top-left-radius:0;
     cursor: pointer;
     padding: 1rem;
-    margin: -1rem -1rem -1rem auto;
 }
 
 .modal-body {
