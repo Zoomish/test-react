@@ -74,15 +74,14 @@ export default function App() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [num, setNum] = useState(1);
-  const [isModal, setModal] = useState(true);
-  const [id, setId] = useState(1);
+  const [isModal, setModal] = useState(false);
+  const [id, setId] = useState(0);
 
   const getData = async (num) => {
     try {
       const response = await axios.get(
         `https://rickandmortyapi.com/api/character?page=${num}`
       );
-      console.log(response.data);
       setData(response.data.results);
     } catch (err) {
       setData(null);
@@ -101,7 +100,10 @@ export default function App() {
       <Container>
         {data &&
           data.map((data) => (
-            <Block key={data.id} onClick={() => setModal(true)}>
+            <Block key={data.id} onClick={() => {
+              setId(data.id);
+              setModal(true)
+            }}>
               <Image style={{ float: "left", }} src={data.image} alt="Profile image" />
               <InfContainer>
                 <h3>{data.name}</h3>
@@ -126,7 +128,7 @@ export default function App() {
       </ButtonContainer>
       <Modal
         isVisible={isModal}
-        id={id}
+        data={data[id-1]}
         onClose={() => setModal(false)}
       />
     </AppContainer>

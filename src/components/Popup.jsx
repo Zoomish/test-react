@@ -3,10 +3,10 @@ import './Popup.css'
 
 export const Modal = ({
     isVisible = false,
-    id,
+    data,
     onClose,
 }) => {
-    console.log(id);
+    console.log(data);
     const keydownHandler = ({ key }) => {
         switch (key) {
             case "Escape":
@@ -25,7 +25,7 @@ export const Modal = ({
         <div className="modal" onClick={onClose}>
             <div className="modal-dialog" onClick={(e) => e.stopPropagation()}>
                 <div className="modal-header">
-                    <h3 className="modal-title">AAAAA</h3>
+                    <h3 className="modal-title">{data.name}</h3>
                     <span className="modal-close" onClick={onClose}>
                         &times;
                     </span>
