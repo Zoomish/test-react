@@ -17,10 +17,13 @@ const Button = styled.button`
 `
 
 const AppContainer = styled.div`
-  margin: auto 2vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `
 const Image = styled.img`
-  max-width:50%;
+  max-width:40%;
   height:auto;
   background: url(${props => props.src});ckground: url(${props => props.src});
 `
@@ -36,7 +39,8 @@ const Block = styled.div`
   border-radius: 15px;
   border: 2px solid #BF4F74;
   color: #BF4F74;
-  width: 100%;
+  max-height: 200px;
+  max-width: 470px;
   align-items:center;
   text-align:center;
   cursor:pointer;
@@ -44,7 +48,7 @@ const Block = styled.div`
 `
 const Container = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(470px, 1fr));
   grid-gap: 32px;
   grid-auto-flow: dense;
   align-items: center;
