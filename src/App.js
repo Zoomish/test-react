@@ -83,7 +83,6 @@ export default function App() {
         `https://rickandmortyapi.com/api/character?page=${num}`
       );
       setData(response.data.results);
-      
     } catch (err) {
       setData(null);
       getData(1)
@@ -93,9 +92,7 @@ export default function App() {
   };
   useEffect(() => {
     getData(num);
-    
   }, [num]);
-  console.log(data);
   return (
     <AppContainer>
       <h1>API Posts</h1>
@@ -105,7 +102,6 @@ export default function App() {
           data.map((data) => (
             <Block key={data.id} onClick={() => {
               setId(data.id);
-              console.log(data.id);
               setModal(true)
             }}>
               <Image style={{ float: "left", }} src={data.image} alt="Profile image" />
@@ -132,7 +128,7 @@ export default function App() {
       </ButtonContainer>
       <Modal
         isVisible={isModal}
-        data={data[(id-1) % 20]}
+        data={data[(id - 1) % 20]}
         onClose={() => setModal(false)}
       />
     </AppContainer>

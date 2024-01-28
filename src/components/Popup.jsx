@@ -5,10 +5,10 @@ import styled from 'styled-components';
 
 const Image = styled.img`
     max-width:76%;
-    border-radius:10px;
+    height:auto;
+    border-radius:15px;
     border-top-right-radius:0;
     border-top-left-radius:0;
-    height:auto;
     background: url(${props => props.src});
 `
 
@@ -19,7 +19,6 @@ export const Modal = ({
     data,
     onClose,
 }) => {
-    console.log(data);
     const keydownHandler = ({ key }) => {
         switch (key) {
             case "Escape":
