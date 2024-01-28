@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import axios from "axios";
+import { useState, useEffect } from "react";
 
-function App() {
+export default function App() {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const response = await axios.get(
+          `https://rickandmortyapi.com/api/character`
+        );
+        console.log(response.data);
+        setData(response.results);
+        setError(null);
+      } catch (err) {
+        setError(err.message);
+        setData(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+    getData();
+  }, []);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>API Posts</h1>
+      {loading && <div>A moment please...</div>}
+      {error && (
+        <div>{`There is a problem fetching the post data - ${error}`}</div>
+      )}
+      <ul>
+        {data &&
+          data.map(({ id, title }) => (
+            <li key={id}>
+              <h3>{id} {title}</h3>
+            </li>
+          ))}
+      </ul>
     </div>
   );
 }
-
-export default App;
