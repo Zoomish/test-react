@@ -1,5 +1,15 @@
 import React, { useState, useEffect } from "react";
 import './Popup.css'
+import styled from 'styled-components';
+
+
+const Image = styled.img`
+  max-width:60%;
+  height:auto;
+  background: url(${props => props.src});
+`
+
+
 
 export const Modal = ({
     isVisible = false,
@@ -24,6 +34,8 @@ export const Modal = ({
     return !isVisible ? null : (
         <div className="modal" onClick={onClose}>
             <div className="modal-dialog" onClick={(e) => e.stopPropagation()}>
+                <Image style={{ float: "left", }} src={data.image} alt="Profile image" />
+
                 <div className="modal-header">
                     <h3 className="modal-title">{data.name}</h3>
                     <span className="modal-close" onClick={onClose}>
@@ -31,9 +43,11 @@ export const Modal = ({
                     </span>
                 </div>
                 <div className="modal-body">
-                    <div className="modal-content">{data.gender} - {data.status}</div>
+                    <div className="modal-content">Gender: {data.gender}</div>
+                    <div className="modal-content">Status: {data.status}</div>
+                    <div className="modal-content">Species: {data.species}</div>
                 </div>
-                <div className="modal-footer"><button onClick={onClose}>Cancel</button></div>
+                <div className="modal-footer"></div>
             </div>
         </div>
     );
