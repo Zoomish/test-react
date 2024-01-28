@@ -9,6 +9,8 @@ const Button = styled.button`
   color: #BF4F74;
   cursor:pointer;
   user-select: none;
+  height: 40px;
+  width: 45%;
 `
 
 const Block = styled.button`
@@ -26,12 +28,19 @@ const Container = styled.div`
   align-items: center;
   max-width:100vw;
 `
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  justify-content:center;
+  align-items: center;
+  max-width:100vw;
+  margin-top: 20px;
+`
 
 
 export default function App() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [num, setNum] = useState(1);
   const getData = async (num) => {
     try {
@@ -40,25 +49,20 @@ export default function App() {
       );
       console.log(response.data);
       setData(response.data.results);
-      setError(null);
     } catch (err) {
-      setError(err.message);
       setData(null);
+      getData(1)
     } finally {
       setLoading(false);
     }
   };
   useEffect(() => {
-    console.log(num);
     getData(num);
   }, [num]);
   return (
     <div className="App">
       <h1>API Posts</h1>
       {loading && <div>A moment please...</div>}
-      {error && (
-        <div>{`There is a problem fetching the post data - ${error}`}</div>
-      )}
       <Container>
         {data &&
           data.map(({ id, name }) => (
@@ -67,18 +71,21 @@ export default function App() {
             </Block>
           ))}
       </Container>
-      <button onClick={() => {
-        setNum(num => num + 1)
-      }}>
-        Load More
-      </button>
-      <button onClick={() => {
-        num<=1
-        ?setNum(1)
-        :setNum(num => num - 1)
-      }}>
-        Back
-      </button>
+      <ButtonContainer>
+        <Button onClick={() => {
+          setNum(num => num + 1)
+        }}>
+          Load More
+        </Button>
+        <Button onClick={() => {
+          num <= 1
+            ? setNum(1)
+            : setNum(num => num - 1)
+        }}>
+          Back
+        </Button>
+      </ButtonContainer>
+
     </div>
   );
 }
