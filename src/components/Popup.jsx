@@ -4,7 +4,10 @@ import styled from 'styled-components';
 
 
 const Image = styled.img`
-    max-width:60%;
+    max-width:76%;
+    border-radius:10px;
+    border-top-right-radius:0;
+    border-top-left-radius:0;
     height:auto;
     background: url(${props => props.src});
 `
@@ -39,8 +42,7 @@ export const Modal = ({
                 </span>
                 <Image style={{ float: "left", }} src={data.image} alt="Profile image" />
                 <div className="modal-header">
-                    <h3 className="modal-title">{data.name}</h3>
-
+                    <h2 className="modal-title">{data.name}</h2>
                 </div>
                 <div className="modal-body">
                     <div className="modal-content">Gender: {data.gender}</div>
