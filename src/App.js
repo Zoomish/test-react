@@ -113,26 +113,26 @@ export default function App() {
 
 
 
-  const getData = async (num, filter={}) => {
-  try {
-    const response = await axios.get(
-      `https://rickandmortyapi.com/api/character?page=${num}`,
-      { params: filter }
-    );
-    setData(response.data.results);
-  } catch (err) {
-    setData(null);
-    getData(1);
-  } finally {
-    setLoading(false);
-  }
-};
+  const getData = async (num, filter = {}) => {
+    try {
+      const response = await axios.get(
+        `https://rickandmortyapi.com/api/character?page=${num}`,
+        { params: filter }
+      );
+      setData(response.data.results);
+    } catch (err) {
+      setData(null);
+      getData(1);
+    } finally {
+      setLoading(false);
+    }
+  };
 
 
 
   useEffect(() => {
-    getData(num,filter);
-  }, [num,filter]);
+    getData(num, filter);
+  }, [num, filter]);
 
 
 
@@ -142,23 +142,23 @@ export default function App() {
     <AppContainer>
       <h1>API Posts</h1>
       <div>
-      <input type="text" value={filter.name} onChange={handleNameChange} placeholder="Filter by name" />
-      <select value={filter.status} onChange={handleStatusChange}>
-        <option value="">All</option>
-        <option value="alive">Alive</option>
-        <option value="dead">Dead</option>
-        <option value="unknown">Unknown</option>
-      </select>
-      <input type="text" value={filter.species} onChange={handleSpeciesChange} placeholder="Filter by species" />
-      <input type="text" value={filter.type} onChange={handleTypeChange} placeholder="Filter by type" />
-      <select value={filter.gender} onChange={handleGenderChange}>
-        <option value="">All</option>
-        <option value="female">Female</option>
-        <option value="male">Male</option>
-        <option value="genderless">Genderless</option>
-        <option value="unknown">Unknown</option>
-      </select>
-    </div>
+        <input type="text" value={filter.name} onChange={handleNameChange} placeholder="Filter by name" />
+        <select value={filter.status} onChange={handleStatusChange}>
+          <option value="">All</option>
+          <option value="alive">Alive</option>
+          <option value="dead">Dead</option>
+          <option value="unknown">Unknown</option>
+        </select>
+        <input type="text" value={filter.species} onChange={handleSpeciesChange} placeholder="Filter by species" />
+        <input type="text" value={filter.type} onChange={handleTypeChange} placeholder="Filter by type" />
+        <select value={filter.gender} onChange={handleGenderChange}>
+          <option value="">All</option>
+          <option value="female">Female</option>
+          <option value="male">Male</option>
+          <option value="genderless">Genderless</option>
+          <option value="unknown">Unknown</option>
+        </select>
+      </div>
       {loading && <div>A moment please...</div>}
       <Container>
         {data &&
