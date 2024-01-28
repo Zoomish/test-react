@@ -38,7 +38,7 @@ export default function App() {
       const response = await axios.get(
         `https://rickandmortyapi.com/api/character?page=${num}`
       );
-      console.log(response.data.results);
+      console.log(response.data);
       setData(response.data.results);
       setError(null);
     } catch (err) {
@@ -48,7 +48,8 @@ export default function App() {
       setLoading(false);
     }
   };
-  useEffect((num) => {
+  useEffect(() => {
+    console.log(num);
     getData(num);
   }, [num]);
   return (
@@ -65,18 +66,19 @@ export default function App() {
               <h3>{id} {name}</h3>
             </Block>
           ))}
-          {num}
       </Container>
       <button onClick={() => {
-        setNum(num=>num + 1)
-        console.log(num)
-        setData(null)
-        }}>Load More</button>
+        setNum(num => num + 1)
+      }}>
+        Load More
+      </button>
       <button onClick={() => {
-        setNum(num=>num - 1)
-        console.log(num)
-        setData(null)
-        }}>Back</button>
+        num<=1
+        ?setNum(1)
+        :setNum(num => num - 1)
+      }}>
+        Back
+      </button>
     </div>
   );
 }
