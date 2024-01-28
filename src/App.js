@@ -8,6 +8,7 @@ const Button = styled.button`
   border: 2px solid #BF4F74;
   color: #BF4F74;
   cursor:pointer;
+  user-select: none;
 `
 
 const Block = styled.button`
@@ -26,30 +27,29 @@ const Container = styled.div`
   max-width:100vw;
 `
 
+
 export default function App() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [num, setNum]=useState(1);
-  
-
-  useEffect(() => {
-    const getData = async (num) => {
-      try {
-        const response = await axios.get(
-          `https://rickandmortyapi.com/api/character?page=${num}`
-        );
-        console.log(response.data);
-        setData(response.data.results);
-        setError(null);
-      } catch (err) {
-        setError(err.message);
-        setData(null);
-      } finally {
-        setLoading(false);
-      }
-    };
-    getData();
+  const [num, setNum] = useState(1);
+  const getData = async (num) => {
+    try {
+      const response = await axios.get(
+        `https://rickandmortyapi.com/api/character?page=${num}`
+      );
+      console.log(response.data.results);
+      setData(response.data.results);
+      setError(null);
+    } catch (err) {
+      setError(err.message);
+      setData(null);
+    } finally {
+      setLoading(false);
+    }
+  };
+  useEffect((num) => {
+    getData(num);
   }, [num]);
   return (
     <div className="App">
@@ -61,14 +61,22 @@ export default function App() {
       <Container>
         {data &&
           data.map(({ id, name }) => (
-              <Block key={id}>
-                <h3>{id} {name}</h3>
-              </Block>
+            <Block key={id}>
+              <h3>{id} {name}</h3>
+            </Block>
           ))}
-          
+          {num}
       </Container>
-      <Button onClick={()=>setNum(num=>num+1)}>Load More</Button>
-          <Button onClick={()=>setNum(num=>num-1)}>Back</Button>
+      <button onClick={() => {
+        setNum(num=>num + 1)
+        console.log(num)
+        setData(null)
+        }}>Load More</button>
+      <button onClick={() => {
+        setNum(num=>num - 1)
+        console.log(num)
+        setData(null)
+        }}>Back</button>
     </div>
   );
 }
