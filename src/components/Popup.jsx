@@ -4,9 +4,9 @@ import styled from 'styled-components';
 
 
 const Image = styled.img`
-  max-width:60%;
-  height:auto;
-  background: url(${props => props.src});
+    max-width:60%;
+    height:auto;
+    background: url(${props => props.src});
 `
 
 
@@ -35,7 +35,6 @@ export const Modal = ({
         <div className="modal" onClick={onClose}>
             <div className="modal-dialog" onClick={(e) => e.stopPropagation()}>
                 <Image style={{ float: "left", }} src={data.image} alt="Profile image" />
-
                 <div className="modal-header">
                     <h3 className="modal-title">{data.name}</h3>
                     <span className="modal-close" onClick={onClose}>

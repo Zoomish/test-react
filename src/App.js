@@ -75,7 +75,7 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [num, setNum] = useState(1);
   const [isModal, setModal] = useState(false);
-  const [id, setId] = useState(0);
+  const [id, setId] = useState(data.id);
 
   const getData = async (num) => {
     try {
@@ -93,7 +93,9 @@ export default function App() {
   };
   useEffect(() => {
     getData(num);
+    
   }, [num]);
+  console.log(data);
   return (
     <AppContainer>
       <h1>API Posts</h1>
@@ -103,6 +105,7 @@ export default function App() {
           data.map((data) => (
             <Block key={data.id} onClick={() => {
               setId(data.id);
+              console.log(data.id);
               setModal(true)
             }}>
               <Image style={{ float: "left", }} src={data.image} alt="Profile image" />
@@ -129,7 +132,7 @@ export default function App() {
       </ButtonContainer>
       <Modal
         isVisible={isModal}
-        data={data[id-1]}
+        data={data[(id-1) % 20]}
         onClose={() => setModal(false)}
       />
     </AppContainer>
