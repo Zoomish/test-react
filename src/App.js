@@ -72,10 +72,11 @@ const ButtonContainer = styled.div`
 
 export default function App() {
   const [data, setData] = useState([]);
+  const [dataId, setDataId] = useState([]);
   const [loading, setLoading] = useState(true);
   const [num, setNum] = useState(1);
   const [isModal, setModal] = useState(false);
-  const [id, setId] = useState(data.id);
+  const [id, setId] = useState(1);
   const [filter, setFilter] = useState({
     name: '',
     status: '',
@@ -106,6 +107,18 @@ export default function App() {
   };
 
 
+  const getSinglePost = async (id) => {
+    try {
+      const response = await axios.get(
+        `https://rickandmortyapi.com/api/character/${id}`
+      );
+      setDataId([response.data]);
+    } catch (err) {
+      setData(null);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   console.log(filter);
 
@@ -136,7 +149,7 @@ export default function App() {
 
 
 
-
+  console.log(data)
 
   return (
     <AppContainer>
@@ -164,7 +177,7 @@ export default function App() {
         {data &&
           data.map((data) => (
             <Block key={data.id} onClick={() => {
-              setId(data.id);
+              getSinglePost(data.id);
               setModal(true)
             }}>
               <Image style={{ float: "left", }} src={data.image} alt="Profile image" />
@@ -191,7 +204,7 @@ export default function App() {
       </ButtonContainer>
       <Modal
         isVisible={isModal}
-        data={data[(id - 1) % 20]}
+        data={dataId}
         onClose={() => setModal(false)}
       />
     </AppContainer>
