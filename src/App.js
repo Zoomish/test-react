@@ -89,15 +89,16 @@ export default function App() {
           <option value="unknown">Unknown</option>
         </select>
       </Sort>
-      {loading && <div>A moment please...</div>}
+      {loading && <h1>A moment please...</h1>}
       <Container>
         {data &&
           data.map((data) => (
             <Block key={data.id} onClick={() => {
-              getSinglePost(data.id);
+              setId(data.id);
+              getSinglePost(id);
               setModal(true)
             }}>
-              <Image style={{ float: "left" }} src={data.image} alt="Profile image" />
+              <Image src={data.image} alt="Profile image" />
               <InfContainer>
                 <h3>{data.name}</h3>
                 <p>{data.gender} - {data.status}</p>
