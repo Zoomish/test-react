@@ -1,82 +1,24 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import './App.css'
-import styled from 'styled-components';
 import { Modal } from "./components/Popup/Popup.jsx";
-
-
-
-const Button = styled.button`
-  background: transparent;
-  border-radius: 3px;
-  border: 2px solid #BF4F74;
-  color: #BF4F74;
-  cursor:pointer;
-  user-select: none;
-  height: 40px;
-  width: 45%;
-  min-width: 470px;
-  margin: auto 16px;
-`
-
-const AppContainer = styled.div`
-  overflow-x:hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`
-const Image = styled.img`
-  max-width:40%;
-  height:auto;
-  background: url(${props => props.src});
-`
-
-const InfContainer = styled.div`
-  width:50%
-`
-
-
-const Block = styled.div`
-  display: flex;  
-  background: transparent;
-  border-radius: 15px;
-  border: 2px solid #BF4F74;
-  color: #BF4F74;
-  max-height: 200px;
-  max-width: 470px;
-  align-items:center;
-  text-align:center;
-  cursor:pointer;
-  overflow: hidden;
-`
-const Container = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(470px, 1fr));
-  grid-gap: 32px;
-  margin-top:5vh;
-  grid-auto-flow: dense;
-  align-items: center;
-  max-width:100vw;
-`
-const ButtonContainer = styled.div`
-  display: flex;
-  flex-flow: row wrap;
-  justify-content:center;
-  align-items: center;
-  width:100vw;
-  margin-top: 5vh;
-  margin-bottom:5vh;
-`
-
+import {
+  AppContainer,
+  Button,
+  InfContainer,
+  Block,
+  Container,
+  ButtonContainer,
+  Image
+} from './AppStyles';
 
 export default function App() {
   const [data, setData] = useState([]);
-  const [dataId, setDataId] = useState([]);
   const [loading, setLoading] = useState(true);
   const [num, setNum] = useState(1);
   const [isModal, setModal] = useState(false);
   const [id, setId] = useState(1);
+  const [dataId, setDataId] = useState([]);
   const [filter, setFilter] = useState({
     name: '',
     status: '',
@@ -85,27 +27,9 @@ export default function App() {
     gender: ''
   });
 
-
-  const handleNameChange = (event) => {
-    setFilter({ ...filter, name: event.target.value });
+  const handleFilterChange = (event, filterKey) => {
+    setFilter({ ...filter, [filterKey]: event.target.value });
   };
-
-  const handleStatusChange = (event) => {
-    setFilter({ ...filter, status: event.target.value });
-  };
-
-  const handleSpeciesChange = (event) => {
-    setFilter({ ...filter, species: event.target.value });
-  };
-
-  const handleTypeChange = (event) => {
-    setFilter({ ...filter, type: event.target.value });
-  };
-
-  const handleGenderChange = (event) => {
-    setFilter({ ...filter, gender: event.target.value });
-  };
-
 
   const getSinglePost = async (id) => {
     try {
@@ -119,12 +43,6 @@ export default function App() {
       setLoading(false);
     }
   };
-
-  
-
-
-
-
 
   const getData = async (num, filter = {}) => {
     try {
@@ -141,32 +59,28 @@ export default function App() {
     }
   };
 
-
-
   useEffect(() => {
     getData(num, filter);
   }, [num, filter]);
 
   useEffect(() => {
-      getSinglePost(id);
-    }, [id]);
-
-
+    getSinglePost(id);
+  }, [id]);
 
   return (
     <AppContainer>
       <h1>API Posts</h1>
       <div>
-        <input type="text" value={filter.name} onChange={handleNameChange} placeholder="Filter by name" />
-        <select value={filter.status} onChange={handleStatusChange}>
+        <input type="text" value={filter.name} onChange={(event) => handleFilterChange(event, 'name')} placeholder="Filter by name" />
+        <select value={filter.status} onChange={(event) => handleFilterChange(event, 'status')}>
           <option value="">All</option>
           <option value="alive">Alive</option>
           <option value="dead">Dead</option>
           <option value="unknown">Unknown</option>
         </select>
-        <input type="text" value={filter.species} onChange={handleSpeciesChange} placeholder="Filter by species" />
-        <input type="text" value={filter.type} onChange={handleTypeChange} placeholder="Filter by type" />
-        <select value={filter.gender} onChange={handleGenderChange}>
+        <input type="text" value={filter.species} onChange={(event) => handleFilterChange(event, 'species')} placeholder="Filter by species" />
+        <input type="text" value={filter.type} onChange={(event) => handleFilterChange(event, 'type')} placeholder="Filter by type" />
+        <select value={filter.gender} onChange={(event) => handleFilterChange(event, 'gender')}>
           <option value="">All</option>
           <option value="female">Female</option>
           <option value="male">Male</option>
@@ -182,7 +96,7 @@ export default function App() {
               getSinglePost(data.id);
               setModal(true)
             }}>
-              <Image style={{ float: "left", }} src={data.image} alt="Profile image" />
+              <Image style={{ float: "left" }} src={data.image} alt="Profile image" />
               <InfContainer>
                 <h3>{data.name}</h3>
                 <p>{data.gender} - {data.status}</p>
