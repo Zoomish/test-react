@@ -47,7 +47,6 @@ export const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(470px, 1fr));
   grid-gap: 32px;
-  margin-top: 5vh;
   grid-auto-flow: dense;
   align-items: center;
   max-width: 100vw;
@@ -61,3 +60,13 @@ export const ButtonContainer = styled.div`
   margin-top: 5vh;
   margin-bottom: 5vh;
 `;
+
+export const Sort = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  font-size: 18px;
+  padding: 6px;
+  margin-top: 5vh;
+  margin-bottom:3vh;
+`

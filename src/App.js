@@ -9,7 +9,8 @@ import {
   Block,
   Container,
   ButtonContainer,
-  Image
+  Image,
+  Sort
 } from './AppStyles';
 
 export default function App() {
@@ -70,7 +71,7 @@ export default function App() {
   return (
     <AppContainer>
       <h1>API Posts</h1>
-      <div>
+      <Sort>
         <input type="text" value={filter.name} onChange={(event) => handleFilterChange(event, 'name')} placeholder="Filter by name" />
         <select value={filter.status} onChange={(event) => handleFilterChange(event, 'status')}>
           <option value="">All</option>
@@ -87,7 +88,7 @@ export default function App() {
           <option value="genderless">Genderless</option>
           <option value="unknown">Unknown</option>
         </select>
-      </div>
+      </Sort>
       {loading && <div>A moment please...</div>}
       <Container>
         {data &&
