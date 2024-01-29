@@ -64,10 +64,26 @@ export const ButtonContainer = styled.div`
 
 export const Sort = styled.div`
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: column wrap;
     justify-content: center;
     font-size: 18px;
     padding: 6px;
     margin-top: 5vh;
     margin-bottom:3vh;
-    `
+    gap: 10px;
+  align-items: center;
+
+  input,
+  select {
+    width: 100%;
+    height: 30px;
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  select {
+    padding: 6px;
+  }
+`
