@@ -112,15 +112,15 @@ export default function App() {
       const response = await axios.get(
         `https://rickandmortyapi.com/api/character/${id}`
       );
-      setDataId([response.data]);
+      setDataId(response.data);
     } catch (err) {
-      setData(null);
+      setDataId(null);
     } finally {
       setLoading(false);
     }
   };
 
-  console.log(filter);
+  
 
 
 
@@ -147,9 +147,11 @@ export default function App() {
     getData(num, filter);
   }, [num, filter]);
 
+  useEffect(() => {
+      getSinglePost(id);
+    }, [id]);
 
 
-  console.log(data)
 
   return (
     <AppContainer>

@@ -19,7 +19,6 @@ export const Modal = ({
     data,
     onClose,
 }) => {
-    console.log(data)
     const keydownHandler = ({ key }) => {
         switch (key) {
             case "Escape":
