@@ -8,7 +8,7 @@ import {
     ModalBody,
     ModalContent,
     ModalTitle,
-    Image
+    Image,
 } from './PopupStyles';
 
 
@@ -37,7 +37,7 @@ export const Modal = ({
                 <ModalClose onClick={onClose}>
                     &times;
                 </ModalClose>
-                <Image style={{ float: "left", }} src={data.image} alt="Profile image" />
+                <Image src={data.image} alt="Profile image" />
                 <ModalHeader>
                     <ModalTitle>{data.name}</ModalTitle>
                 </ModalHeader>

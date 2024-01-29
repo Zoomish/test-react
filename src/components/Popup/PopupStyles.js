@@ -9,6 +9,7 @@ export const Image = styled.img`
     border-top-right-radius:0;
     border-top-left-radius:0;
     background: url(${props => props.src});
+    float:left;
 `
 
 export const appearAnimation = keyframes`
