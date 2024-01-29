@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import './App.css'
 import styled from 'styled-components';
-import { Modal } from "./components/Popup";
+import { Modal } from "./components/Popup/Popup.jsx";
 
 
 
