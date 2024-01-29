@@ -86,7 +86,7 @@ export const Sort = styled.div`
     padding: 6px;
     gap: 10px;
     align-items: center;
-
+    transition: all 0.3s ease;
     input,
     select {
     width: 100%;
