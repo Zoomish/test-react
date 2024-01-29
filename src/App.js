@@ -10,7 +10,9 @@ import {
   Container,
   ButtonContainer,
   Image,
-  Sort
+  Sort,
+  SortContainer,
+  ToggleButton
 } from './AppStyles';
 
 export default function App() {
@@ -20,6 +22,7 @@ export default function App() {
   const [isModal, setModal] = useState(false);
   const [id, setId] = useState(1);
   const [dataId, setDataId] = useState([]);
+  const [showSort, setShowSort] = useState(false);
   const [filter, setFilter] = useState({
     name: '',
     status: '',
@@ -27,6 +30,10 @@ export default function App() {
     type: '',
     gender: ''
   });
+
+  const toggleSort = () => {
+    setShowSort(!showSort);
+  };
 
   const handleFilterChange = (event, filterKey) => {
     setFilter({ ...filter, [filterKey]: event.target.value });
@@ -71,7 +78,9 @@ export default function App() {
   return (
     <AppContainer>
       <h1>API Posts</h1>
-      <Sort>
+      <SortContainer>
+      <ToggleButton onClick={toggleSort}>Toggle Sort</ToggleButton>
+      {showSort && <Sort>
         <input type="text" value={filter.name} onChange={(event) => handleFilterChange(event, 'name')} placeholder="Filter by name" />
         <select value={filter.status} onChange={(event) => handleFilterChange(event, 'status')}>
           <option value="">All</option>
@@ -88,7 +97,9 @@ export default function App() {
           <option value="genderless">Genderless</option>
           <option value="unknown">Unknown</option>
         </select>
-      </Sort>
+      </Sort>}
+    </SortContainer>
+      
       {loading && <h1>A moment please...</h1>}
       <Container>
         {data &&
